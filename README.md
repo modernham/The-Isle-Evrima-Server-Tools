@@ -16,7 +16,7 @@ TheIsleServer.exe MultiHome=192.181.104.13?Port=7777?QueryPort=7778 -log
 
 ---
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f8c00f05-f11b-4df8-929b-8179c9866d27/Untitled.png)
+![Alt text](/RCON_Screenshot.png?raw=true "Screenshot")
 
 Run with:
 
