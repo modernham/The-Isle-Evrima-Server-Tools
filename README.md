@@ -40,4 +40,4 @@ python TheIsle_RCON.py
 https://takethebait.net/create-a-dedicated-the-isle-evrima-server-on-ubuntu-22-04-linux/
 
 ### Troubbleshoot issues:
-https://takethebait.net/troubleshooting-the-isle-dedicated-server-issues/****
+https://takethebait.net/troubleshooting-the-isle-dedicated-server-issues/
