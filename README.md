@@ -33,3 +33,11 @@ python TheIsle_RCON.py
 [Game.ini](https://github.com/modernham/The-Isle-Evrima-Server-Tools/blob/main/Game.ini)
 
 [Engine.ini](https://github.com/modernham/The-Isle-Evrima-Server-Tools/blob/main/Engine.ini)
+
+
+### Setup your own Linux Dedicated server!:
+
+https://takethebait.net/create-a-dedicated-the-isle-evrima-server-on-ubuntu-22-04-linux/
+
+### Troubbleshoot issues:
+https://takethebait.net/troubleshooting-the-isle-dedicated-server-issues/****
