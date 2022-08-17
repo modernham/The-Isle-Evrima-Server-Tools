@@ -28,8 +28,9 @@ python TheIsle_RCON.py
 
 **RCON is unencrypted and passwords are sent in plaintext over the network. BE very careful about using RCON outside of the servers network.** 
 
-### Working Config Files:
+### Setup your own Linux Dedicated server!:
 
-[Game.ini](https://github.com/modernham/The-Isle-Evrima-Server-Tools/blob/main/Game.ini)
+https://takethebait.net/create-a-dedicated-the-isle-evrima-server-on-ubuntu-22-04-linux/
 
-[Engine.ini](https://github.com/modernham/The-Isle-Evrima-Server-Tools/blob/main/Engine.ini)
+### Troubbleshoot issues:
+https://takethebait.net/troubleshooting-the-isle-dedicated-server-issues/
