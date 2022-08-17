@@ -1,11 +1,21 @@
+"""
+Connects to an RCON server running on the Isle Evrima.
+Support a few commands at the time, and supports command arguments in the following form:
+python TheIsle_RCON.py --ip <IP> --port <PORT> --password <password> --command <command> --arg <Command arg in Quotes>
+"""
 import socket, time, sys
 import os
+import argparse
+
+__author__ = "ModernHam/Aspect"
+__license__ = "GPLv3"
 
 ip = "127.0.0.1"
 port = 8888
 password = "password"
 timeout = 5
 packetMainLength = 2
+arg = ""
 
 
 def cls():
@@ -21,8 +31,11 @@ def saveServer():
     s.send((SAVE))
 
 def makeAnouncment():
-  cls()
-  userinput = input("Please enter the message: ")
+  if (len(arg) > 0):
+    userinput = arg
+  else:
+    cls()
+    userinput = input("Please enter the message: ")
   ANOUNCE =  bytes('\x02', 'utf-8') + bytes('\x10', 'utf-8') + userinput.encode() + bytes('\x00', 'utf-8')
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     # Connect to the TCP Socket
@@ -31,9 +44,12 @@ def makeAnouncment():
     s.send((ANOUNCE))
 
 def banPlayer():
-  cls()
-  print("Format: [SteamID(BASE64)], [description], [ban length in seconds(0 is Permanent)]")
-  userinput = input("Please enter ban info in the format above: ")
+  if (len(arg) > 0):
+    userinput = arg
+  else:
+    cls()
+    print("Format: [SteamID(BASE64)], [description], [ban length in seconds(0 is Permanent)]")
+    userinput = input("Please enter ban info in the format above: ")
   BAN =  bytes('\x02', 'utf-8') + bytes('\x20', 'utf-8') + userinput.encode() + bytes('\x00', 'utf-8')
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     # Connect to the TCP Socket
@@ -42,8 +58,11 @@ def banPlayer():
     s.send((BAN))
 
 def kickPlayer():
-  cls()
-  userinput = input("Please enter the player ID to kick(SteamID in Base64): ")
+  if (len(arg) > 0):
+    userinput = arg
+  else:
+    cls()
+    userinput = input("Please enter the player ID to kick(SteamID in Base64): ")
   KICK =  bytes('\x02', 'utf-8') + bytes('\x30', 'utf-8') + userinput.encode() + bytes('\x00', 'utf-8')
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     # Connect to the TCP Socket
@@ -66,7 +85,8 @@ def playerList():
 def chooseCommand():
   cls()
   print("Credit: Aspect#3735")
-  print("Version: 0.1")
+  print("Version: 0.2")
+  print("Now support command arguments, see 'python TheIsle_RCON.py -h'")
   while True:
     print("Please select one of the below support commands")
     print("1 - Save the Server")
@@ -91,12 +111,26 @@ def chooseCommand():
 
 
 def connect():
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--ip', type=str, required=False, help='IP Address of the Server')
+  parser.add_argument('--port', type=int, required=False, help='Port Address of the Server')
+  parser.add_argument('--password', type=str, required=False, help='Password Address of the Server')
+  parser.add_argument('--command', type=str, required=False, help='Command to execute: save, ban, list, kick, announce')
+  parser.add_argument('--arg', type=str, required=False, help='Argument if needed to the above in quotes. Player name, message etc.')
+  args = parser.parse_args()
   global ip
   global port
   global password
-  ip = input("Please enter host IP, Example 155.11.23.55: ")
-  port = int(input("Please enter RCON port: "))
-  password = input("Please enter RCON password: ")
+  global arg
+  if args.ip:
+    ip = args.ip
+    port = args.port
+    password = args.password
+    arg = args.arg
+  else:
+    ip = input("Please enter host IP, Example 155.11.23.55: ")
+    port = int(input("Please enter RCON port: "))
+    password = input("Please enter RCON password: ")
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     #Connect to the TCP Socket
     s.settimeout(timeout)
@@ -111,9 +145,21 @@ def connect():
     if(str(message).__contains__("Accepted")):
       print(message)
     else:
-      print("Error")
+      print(message)
       sys.exit()
-    chooseCommand()
+    if args.ip:
+      if args.command == "save":
+        saveServer()
+      if args.command == "announce":
+        makeAnouncment()
+      if args.command == "ban":
+        banPlayer()
+      if args.command == "kick":
+        kickPlayer()
+      if args.command == "list":
+        playerList()
+    else:
+      chooseCommand()
 
 
 connect()
