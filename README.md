@@ -53,5 +53,5 @@ TheIsleServer.exe MultiHome=192.181.104.13?Port=7777?QueryPort=7778 -log
 
 https://takethebait.net/create-a-dedicated-the-isle-evrima-server-on-ubuntu-22-04-linux/
 
-### Troubbleshoot issues:
+### Troubleshoot issues:
 https://takethebait.net/troubleshooting-the-isle-dedicated-server-issues/
