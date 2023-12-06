@@ -45,6 +45,16 @@ Windows:
 TheIsleServer.exe MultiHome=192.181.104.13?Port=7777?QueryPort=7778 -log
 ```
 
+## RCON BruteForce
+
+The "RCON Bruteforce folder contains a script to bruteforce RCON servers on The Isle Evrima. This script was created for **security auditing and penetration testing ONLY**.
+Create a "passwords.txt" file containing a list of passwords, and a "ip_list.txt" file with a list of IP's to servers to audit.
+You can then run the Bruteforce by simply using:
+```
+python RCON_BRUTE.py
+```
+It will try every password on every IP until a valid password is found, and then tell you via the console.
+
 ### **Important Note!**
 
 **RCON is unencrypted and passwords are sent in plaintext over the network. BE very careful about using RCON outside of the servers network.** 
